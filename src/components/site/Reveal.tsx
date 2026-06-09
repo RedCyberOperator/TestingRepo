@@ -13,8 +13,12 @@ type RevealProps = {
 };
 
 /**
- * Scroll-triggered entrance using GSAP (ease: expo.out).
- * Falls back to instant visibility when reduced motion is requested.
+ * Scroll-triggered text reveal:
+ * Fade-In (0 -> 1), TranslateY (20px -> 0), Stagger, ease power2.out,
+ * triggered as soon as the element scrolls into the viewport.
+ *
+ * The wrapper is rendered visible by default so content is ALWAYS shown,
+ * even if JS/GSAP fails. The hidden start state is applied at runtime only.
  */
 export function Reveal({
   children,
@@ -22,7 +26,7 @@ export function Reveal({
   stagger = false,
   delay = 0,
   as,
-  y = 28,
+  y = 20,
 }: RevealProps) {
   const ref = useRef<HTMLDivElement>(null);
   const Tag = (as ?? "div") as ElementType;
@@ -30,11 +34,7 @@ export function Reveal({
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
-
-    if (prefersReducedMotion()) {
-      el.style.opacity = "1";
-      return;
-    }
+    if (prefersReducedMotion()) return;
 
     const { gsap, ScrollTrigger } = ensureGsap();
     const targets = stagger ? Array.from(el.children) : el;
@@ -44,9 +44,9 @@ export function Reveal({
       gsap.to(targets, {
         opacity: 1,
         y: 0,
-        duration: 1.1,
+        duration: 0.9,
         delay,
-        ease: "expo.out",
+        ease: "power2.out",
         stagger: stagger ? 0.12 : 0,
         scrollTrigger: {
           trigger: el,
@@ -61,7 +61,7 @@ export function Reveal({
   }, [stagger, delay, y]);
 
   return (
-    <Tag ref={ref} className={cn(className)} style={{ opacity: 0 }}>
+    <Tag ref={ref} className={cn(className)}>
       {children}
     </Tag>
   );
