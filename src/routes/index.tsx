@@ -53,6 +53,12 @@ function Index() {
       <Navbar />
       <main>
         <Hero />
+        <section className="mx-auto max-w-5xl px-6 py-28 md:py-40">
+          <ScrollText
+            text="Wir sind ein Team aus erfahrenen Gestaltern und Entwicklern mit langjähriger Erfahrung in digitalen Markenauftritten und performanten Websites."
+            className="font-sans text-3xl font-bold leading-[1.15] tracking-[-0.02em] text-foreground sm:text-4xl md:text-5xl lg:text-6xl"
+          />
+        </section>
         <Services />
         <ScrollGallery />
         <Portfolio />
