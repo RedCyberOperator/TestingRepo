@@ -32,12 +32,12 @@ export function ScrollGallery() {
 
     const { gsap, ScrollTrigger } = ensureGsap();
     const slides = Array.from(stage.querySelectorAll<HTMLElement>("[data-slide]"));
-    const imgs = slides.map((s) => s.querySelector<HTMLElement>("img"));
 
     const ctx = gsap.context(() => {
-      gsap.set(slides, { opacity: 0 });
-      gsap.set(slides[0], { opacity: 1 });
-      gsap.set(imgs, { scale: 1.15 });
+      // Stack slides: first fully visible, the rest waiting below the viewport.
+      slides.forEach((slide, i) => {
+        gsap.set(slide, { yPercent: i === 0 ? 0 : 100, zIndex: i });
+      });
 
       const tl = gsap.timeline({
         defaults: { ease: "power2.inOut" },
@@ -51,13 +51,9 @@ export function ScrollGallery() {
         },
       });
 
-      // Gentle continuous zoom-in on each visible image + crossfades.
-      tl.to(imgs[0], { scale: 1, duration: 1 }, 0);
+      // Each next image slides up from below, partially revealing as it covers the previous.
       for (let i = 1; i < slides.length; i++) {
-        const at = i;
-        tl.to(slides[i - 1], { opacity: 0, duration: 0.5 }, at - 0.5);
-        tl.to(slides[i], { opacity: 1, duration: 0.5 }, at - 0.5);
-        tl.fromTo(imgs[i], { scale: 1.15 }, { scale: 1, duration: 1 }, at - 0.5);
+        tl.to(slides[i], { yPercent: 0, duration: 1 }, i);
       }
     }, section);
 

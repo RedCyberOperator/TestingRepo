@@ -21,7 +21,8 @@ export function CustomCursor() {
     const { gsap } = ensureGsap();
 
     document.body.classList.add("has-custom-cursor");
-    gsap.set(el, { xPercent: -50, yPercent: -50, opacity: 0, scale: 1 });
+    // force3D keeps the element on its own GPU layer for crisp scaling.
+    gsap.set(el, { xPercent: -50, yPercent: -50, opacity: 0, scale: 1, force3D: true });
 
     const xTo = gsap.quickTo(el, "x", { duration: 0.55, ease: "power3.out" });
     const yTo = gsap.quickTo(el, "y", { duration: 0.55, ease: "power3.out" });
@@ -39,7 +40,7 @@ export function CustomCursor() {
     const interactive = "a, button, [role='button'], input, textarea, select, label, [data-cursor]";
     const onOver = (e: Event) => {
       if ((e.target as Element)?.closest?.(interactive)) {
-        gsap.to(el, { scale: 2.6, duration: 0.3, ease: "power3.out" });
+        gsap.to(el, { scale: 2.0, duration: 0.3, ease: "power3.out" });
       }
     };
     const onOut = (e: Event) => {
@@ -70,8 +71,13 @@ export function CustomCursor() {
     <div
       ref={dotRef}
       aria-hidden="true"
-      className="pointer-events-none fixed left-0 top-0 z-[100] h-8 w-8 rounded-full bg-white opacity-0 mix-blend-difference"
-      style={{ willChange: "transform" }}
+      className="pointer-events-none fixed left-0 top-0 z-[100] h-10 w-10 rounded-full border border-foreground/30 bg-foreground opacity-0"
+      style={{
+        willChange: "transform",
+        transform: "translateZ(0)",
+        backfaceVisibility: "hidden",
+        WebkitBackfaceVisibility: "hidden",
+      }}
     />
   );
 }

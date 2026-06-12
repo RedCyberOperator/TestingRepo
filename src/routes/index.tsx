@@ -7,7 +7,8 @@ import { Portfolio } from "@/components/site/Portfolio";
 import { Process } from "@/components/site/Process";
 import { Pricing } from "@/components/site/Pricing";
 import { Testimonials } from "@/components/site/Testimonials";
-import { LocationMap } from "@/components/site/LocationMap";
+import { ScrollText } from "@/components/site/ScrollText";
+
 import { Contact } from "@/components/site/Contact";
 import { Footer } from "@/components/site/Footer";
 import { CookieBanner } from "@/components/site/CookieBanner";
@@ -52,13 +53,19 @@ function Index() {
       <Navbar />
       <main>
         <Hero />
+        <section className="mx-auto max-w-5xl px-6 py-28 md:py-40">
+          <ScrollText
+            text="Wir sind ein Team aus erfahrenen Gestaltern und Entwicklern mit langjähriger Erfahrung in digitalen Markenauftritten und performanten Websites."
+            className="font-sans text-3xl font-bold leading-[1.15] tracking-[-0.02em] text-foreground sm:text-4xl md:text-5xl lg:text-6xl"
+          />
+        </section>
         <Services />
         <ScrollGallery />
         <Portfolio />
         <Process />
         <Pricing />
         <Testimonials />
-        <LocationMap />
+        
         <Contact />
       </main>
       <Footer />
