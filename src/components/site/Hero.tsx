@@ -7,13 +7,13 @@ import midPeak from "@/assets/peaks_middle.png.asset.json";
 import backPeak from "@/assets/peaks_back.png.asset.json";
 import cloud from "@/assets/cloud_white.webp.asset.json";
 
-/** Cloud layers — speeds derived from the brief (relative to viewport width). */
+/** Cloud layers — anchored to the foot of the mountains as drifting mist. */
 const CLOUD_LAYERS = [
-  { top: "10%", scale: 1.15, opacity: 0.85, duration: 38, drift: -1 },
-  { top: "24%", scale: 0.9, opacity: 0.6, duration: 46, drift: 1 },
-  { top: "38%", scale: 1.4, opacity: 0.5, duration: 52, drift: -1 },
-  { top: "52%", scale: 1.1, opacity: 0.4, duration: 58, drift: 1 },
-  { top: "66%", scale: 1.6, opacity: 0.3, duration: 64, drift: -1 },
+  { bottom: "-2%", scale: 1.6, opacity: 0.85, duration: 64, drift: -1 },
+  { bottom: "4%", scale: 1.3, opacity: 0.7, duration: 52, drift: 1 },
+  { bottom: "10%", scale: 1.15, opacity: 0.55, duration: 46, drift: -1 },
+  { bottom: "16%", scale: 0.95, opacity: 0.4, duration: 58, drift: 1 },
+  { bottom: "22%", scale: 1.1, opacity: 0.28, duration: 38, drift: -1 },
 ] as const;
 
 export function Hero() {
