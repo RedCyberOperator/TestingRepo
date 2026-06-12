@@ -128,7 +128,7 @@ export function Hero() {
         }}
       />
 
-      {/* Cloud layers */}
+      {/* Cloud layers — drifting mist at the foot of the mountains */}
       {CLOUD_LAYERS.map((layer, i) => (
         <div
           key={i}
@@ -136,8 +136,8 @@ export function Hero() {
             cloudRefs.current[i] = n;
           }}
           aria-hidden="true"
-          className="pointer-events-none absolute left-1/2 z-[2] w-[150%] -translate-x-1/2 will-change-transform"
-          style={{ top: layer.top }}
+          className="pointer-events-none absolute left-1/2 z-[6] w-[160%] -translate-x-1/2 will-change-transform"
+          style={{ bottom: layer.bottom }}
         >
           <img
             src={cloud.url}
