@@ -58,7 +58,7 @@ function Index() {
         <Process />
         <Pricing />
         <Testimonials />
-        <LocationMap />
+        
         <Contact />
       </main>
       <Footer />
