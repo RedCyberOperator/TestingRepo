@@ -21,7 +21,8 @@ export function CustomCursor() {
     const { gsap } = ensureGsap();
 
     document.body.classList.add("has-custom-cursor");
-    gsap.set(el, { xPercent: -50, yPercent: -50, opacity: 0, scale: 1 });
+    // force3D keeps the element on its own GPU layer for crisp scaling.
+    gsap.set(el, { xPercent: -50, yPercent: -50, opacity: 0, scale: 1, force3D: true });
 
     const xTo = gsap.quickTo(el, "x", { duration: 0.55, ease: "power3.out" });
     const yTo = gsap.quickTo(el, "y", { duration: 0.55, ease: "power3.out" });
