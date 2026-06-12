@@ -71,8 +71,13 @@ export function CustomCursor() {
     <div
       ref={dotRef}
       aria-hidden="true"
-      className="pointer-events-none fixed left-0 top-0 z-[100] h-8 w-8 rounded-full bg-white opacity-0 mix-blend-difference"
-      style={{ willChange: "transform" }}
+      className="pointer-events-none fixed left-0 top-0 z-[100] h-10 w-10 rounded-full border border-foreground/30 bg-foreground opacity-0"
+      style={{
+        willChange: "transform",
+        transform: "translateZ(0)",
+        backfaceVisibility: "hidden",
+        WebkitBackfaceVisibility: "hidden",
+      }}
     />
   );
 }
