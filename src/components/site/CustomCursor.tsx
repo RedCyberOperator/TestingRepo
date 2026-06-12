@@ -40,7 +40,7 @@ export function CustomCursor() {
     const interactive = "a, button, [role='button'], input, textarea, select, label, [data-cursor]";
     const onOver = (e: Event) => {
       if ((e.target as Element)?.closest?.(interactive)) {
-        gsap.to(el, { scale: 2.6, duration: 0.3, ease: "power3.out" });
+        gsap.to(el, { scale: 2.0, duration: 0.3, ease: "power3.out" });
       }
     };
     const onOut = (e: Event) => {
