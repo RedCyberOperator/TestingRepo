@@ -66,6 +66,7 @@ function Index() {
         <Process />
         <Pricing />
         <Testimonials />
+        <Team />
         
         <Contact />
       </main>
