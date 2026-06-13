@@ -2,25 +2,22 @@ import { useEffect, useRef } from "react";
 import { ArrowUpRight } from "lucide-react";
 import { ensureGsap, prefersReducedMotion, isMobileViewport } from "@/lib/gsap";
 
-import frontPeak from "@/assets/peaks_front.png.asset.json";
-import midPeak from "@/assets/peaks_middle.png.asset.json";
-import backPeak from "@/assets/peaks_back.png.asset.json";
+import wallpaper from "@/assets/hero_wallpaper.png.asset.json";
+import depthMap from "@/assets/hero_depthmap.png.asset.json";
+import mask from "@/assets/hero_mask.png.asset.json";
 import cloud from "@/assets/cloud_white.webp.asset.json";
 
-/** Cloud layers — anchored to the foot of the mountains as drifting mist. */
+/** Cloud layers — drifting mist that sits between the distant scene and the foreground ridge. */
 const CLOUD_LAYERS = [
-  { bottom: "-2%", scale: 1.6, opacity: 0.85, duration: 64, drift: -1 },
-  { bottom: "4%", scale: 1.3, opacity: 0.7, duration: 52, drift: 1 },
-  { bottom: "10%", scale: 1.15, opacity: 0.55, duration: 46, drift: -1 },
-  { bottom: "16%", scale: 0.95, opacity: 0.4, duration: 58, drift: 1 },
-  { bottom: "22%", scale: 1.1, opacity: 0.28, duration: 38, drift: -1 },
+  { bottom: "2%", scale: 1.5, opacity: 0.7, duration: 64, drift: -1 },
+  { bottom: "10%", scale: 1.25, opacity: 0.5, duration: 52, drift: 1 },
+  { bottom: "20%", scale: 1.05, opacity: 0.32, duration: 46, drift: -1 },
 ] as const;
 
 export function Hero() {
   const sectionRef = useRef<HTMLElement>(null);
-  const backRef = useRef<HTMLDivElement>(null);
-  const midRef = useRef<HTMLDivElement>(null);
-  const frontRef = useRef<HTMLDivElement>(null);
+  const sceneRef = useRef<HTMLDivElement>(null);
+  const ridgeRef = useRef<HTMLDivElement>(null);
   const fogRef = useRef<HTMLDivElement>(null);
   const copyRef = useRef<HTMLDivElement>(null);
   const cloudRefs = useRef<Array<HTMLDivElement | null>>([]);
@@ -48,7 +45,7 @@ export function Hero() {
         });
       }
 
-      // ---- Scroll parallax (depth-map multipliers: front 1.0 / mid 0.6 / back 0.25) ----
+      // ---- Scroll parallax: distant scene drifts slowly, foreground ridge faster ----
       const scrub = {
         trigger: section,
         start: "top top",
@@ -56,9 +53,8 @@ export function Hero() {
         scrub: mobile ? true : 0.6,
       } as const;
 
-      gsap.to(backRef.current, { yPercent: 6, ease: "none", scrollTrigger: scrub });
-      gsap.to(midRef.current, { yPercent: 14, ease: "none", scrollTrigger: scrub });
-      gsap.to(frontRef.current, { yPercent: 24, ease: "none", scrollTrigger: scrub });
+      gsap.to(sceneRef.current, { yPercent: 8, scale: 1.06, ease: "none", scrollTrigger: scrub });
+      gsap.to(ridgeRef.current, { yPercent: 22, ease: "none", scrollTrigger: scrub });
       gsap.to(fogRef.current, { yPercent: 30, opacity: 0, ease: "none", scrollTrigger: scrub });
       gsap.to(copyRef.current, {
         yPercent: -16,
@@ -67,7 +63,7 @@ export function Hero() {
         scrollTrigger: { ...scrub, end: "70% top" },
       });
 
-      // ---- Cloud drift (continuous, GSAP timelines) ----
+      // ---- Cloud drift (continuous) ----
       cloudRefs.current.forEach((node, i) => {
         if (!node) return;
         const layer = CLOUD_LAYERS[i];
@@ -91,14 +87,13 @@ export function Hero() {
         });
       });
 
-      // ---- Pointer parallax (desktop only) ----
+      // ---- Pointer parallax (desktop only) — depth-map driven displacement feel ----
       if (!mobile) {
         const onMove = (e: PointerEvent) => {
           const rx = (e.clientX / window.innerWidth - 0.5) * 2;
           const ry = (e.clientY / window.innerHeight - 0.5) * 2;
-          gsap.to(backRef.current, { x: rx * -8, y: ry * -4, duration: 1.2, ease: "power2.out" });
-          gsap.to(midRef.current, { x: rx * -16, y: ry * -8, duration: 1.2, ease: "power2.out" });
-          gsap.to(frontRef.current, { x: rx * -28, y: ry * -12, duration: 1.2, ease: "power2.out" });
+          gsap.to(sceneRef.current, { x: rx * -10, y: ry * -6, duration: 1.2, ease: "power2.out" });
+          gsap.to(ridgeRef.current, { x: rx * -26, y: ry * -12, duration: 1.2, ease: "power2.out" });
         };
         window.addEventListener("pointermove", onMove);
         return () => window.removeEventListener("pointermove", onMove);
@@ -115,20 +110,30 @@ export function Hero() {
       aria-label="Einleitung"
       className="relative flex min-h-[640px] h-[100svh] w-full overflow-hidden bg-sky-gradient"
     >
-      {/* Fog texture */}
+      {/* Distant scene — the full wallpaper, slightly oversized for parallax headroom */}
+      <div ref={sceneRef} aria-hidden="true" className="absolute inset-0 z-[2] will-change-transform">
+        <img
+          src={wallpaper.url}
+          alt="Schroffe Berggipfel im Morgennebel"
+          className="h-full w-full select-none object-cover"
+          fetchPriority="high"
+        />
+      </div>
+
+      {/* Depth-map texture — subtle grain that deepens the scene */}
       <div
         ref={fogRef}
         aria-hidden="true"
-        className="pointer-events-none absolute inset-0 z-[1] mix-blend-soft-light"
+        className="pointer-events-none absolute inset-0 z-[3] mix-blend-soft-light"
         style={{
-          backgroundImage: `url(${cloud.url})`,
+          backgroundImage: `url(${depthMap.url})`,
           backgroundSize: "cover",
-          backgroundPosition: "center 30%",
-          opacity: 0.1,
+          backgroundPosition: "center",
+          opacity: 0.18,
         }}
       />
 
-      {/* Cloud layers — drifting mist at the foot of the mountains */}
+      {/* Cloud layers — drifting mist between scene and ridge */}
       {CLOUD_LAYERS.map((layer, i) => (
         <div
           key={i}
@@ -136,7 +141,7 @@ export function Hero() {
             cloudRefs.current[i] = n;
           }}
           aria-hidden="true"
-          className="pointer-events-none absolute left-1/2 z-[6] w-[160%] -translate-x-1/2 will-change-transform"
+          className="pointer-events-none absolute left-1/2 z-[4] w-[160%] -translate-x-1/2 will-change-transform"
           style={{ bottom: layer.bottom }}
         >
           <img
@@ -150,28 +155,30 @@ export function Hero() {
         </div>
       ))}
 
-      {/* Mountain layers (bottom-anchored) */}
-      <div ref={backRef} aria-hidden="true" className="absolute inset-x-0 bottom-0 z-[3] will-change-transform">
-        <img src={backPeak.url} alt="" width={1920} height={769} className="w-full select-none" />
-      </div>
-      <div ref={midRef} aria-hidden="true" className="absolute inset-x-0 bottom-0 z-[4] will-change-transform">
-        <img src={midPeak.url} alt="" width={1920} height={769} className="w-full select-none" />
-      </div>
-      <div ref={frontRef} aria-hidden="true" className="absolute inset-x-0 bottom-0 z-[5] will-change-transform">
-        <img
-          src={frontPeak.url}
-          alt="Schroffe Berggipfel im Morgennebel"
-          width={1920}
-          height={769}
-          fetchPriority="high"
-          className="w-full select-none"
+      {/* Foreground ridge — the same wallpaper masked to the mountains, parallaxing in front */}
+      <div ref={ridgeRef} aria-hidden="true" className="absolute inset-0 z-[5] will-change-transform">
+        <div
+          className="h-full w-full"
+          style={{
+            backgroundImage: `url(${wallpaper.url})`,
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+            WebkitMaskImage: `url(${mask.url})`,
+            maskImage: `url(${mask.url})`,
+            WebkitMaskSize: "cover",
+            maskSize: "cover",
+            WebkitMaskPosition: "center",
+            maskPosition: "center",
+            WebkitMaskRepeat: "no-repeat",
+            maskRepeat: "no-repeat",
+          }}
         />
       </div>
 
       {/* Soft fade into the next section */}
       <div aria-hidden="true" className="absolute inset-x-0 bottom-0 z-[6] h-32 bg-fade-gradient" />
 
-      {/* Copy — positioned like the reference: headline top-left, meta bottom row */}
+      {/* Copy — headline top-left, meta bottom row */}
       <div
         ref={copyRef}
         className="relative z-[7] mx-auto flex w-full max-w-[1500px] flex-col px-6 pb-10 pt-28 will-change-transform sm:px-10 md:pt-32"

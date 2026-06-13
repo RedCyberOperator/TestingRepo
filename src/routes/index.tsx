@@ -13,7 +13,6 @@ import { ScrollText } from "@/components/site/ScrollText";
 import { Contact } from "@/components/site/Contact";
 import { Footer } from "@/components/site/Footer";
 import { CookieBanner } from "@/components/site/CookieBanner";
-import { CustomCursor } from "@/components/site/CustomCursor";
 
 
 const orgJsonLd = {
@@ -50,7 +49,6 @@ export const Route = createFileRoute("/")({
 function Index() {
   return (
     <div id="top">
-      <CustomCursor />
       <Navbar />
       <main>
         <Hero />
