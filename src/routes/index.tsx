@@ -49,7 +49,6 @@ export const Route = createFileRoute("/")({
 function Index() {
   return (
     <div id="top">
-      <CustomCursor />
       <Navbar />
       <main>
         <Hero />
