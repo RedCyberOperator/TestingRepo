@@ -2,20 +2,23 @@ import { useEffect, useRef } from "react";
 import { ArrowUpRight } from "lucide-react";
 import { ensureGsap, prefersReducedMotion, isMobileViewport } from "@/lib/gsap";
 
-import depthMap from "@/assets/newbg_depth.png.asset.json";
-import mask from "@/assets/newbg_mask.png.asset.json";
+import wallpaper from "@/assets/hero_wallpaper.png.asset.json";
+import depthMap from "@/assets/hero_depthmap.png.asset.json";
+import mask from "@/assets/hero_mask.png.asset.json";
 import cloud from "@/assets/cloud_white.webp.asset.json";
 
-/** Cloud layers — drifting mist that settles at the base of the mountains for a soft section hand-off. */
+/** Cloud layers — drifting mist that sits between the distant scene and the foreground ridge. */
 const CLOUD_LAYERS = [
-  { bottom: "-4%", scale: 1.6, opacity: 0.85, duration: 64, drift: -1 },
-  { bottom: "4%", scale: 1.3, opacity: 0.55, duration: 52, drift: 1 },
-  { bottom: "12%", scale: 1.1, opacity: 0.35, duration: 46, drift: -1 },
+  { bottom: "2%", scale: 1.5, opacity: 0.7, duration: 64, drift: -1 },
+  { bottom: "10%", scale: 1.25, opacity: 0.5, duration: 52, drift: 1 },
+  { bottom: "20%", scale: 1.05, opacity: 0.32, duration: 46, drift: -1 },
 ] as const;
 
 export function Hero() {
   const sectionRef = useRef<HTMLElement>(null);
+  const sceneRef = useRef<HTMLDivElement>(null);
   const ridgeRef = useRef<HTMLDivElement>(null);
+  const fogRef = useRef<HTMLDivElement>(null);
   const copyRef = useRef<HTMLDivElement>(null);
   const cloudRefs = useRef<Array<HTMLDivElement | null>>([]);
 
@@ -42,6 +45,7 @@ export function Hero() {
         });
       }
 
+      // ---- Scroll parallax: distant scene drifts slowly, foreground ridge faster ----
       const scrub = {
         trigger: section,
         start: "top top",
@@ -49,8 +53,9 @@ export function Hero() {
         scrub: mobile ? true : 0.6,
       } as const;
 
-      // ---- Scroll parallax: ONLY the masked foreground ridge moves ----
-      gsap.to(ridgeRef.current, { yPercent: 16, scale: 1.08, ease: "none", scrollTrigger: scrub });
+      gsap.to(sceneRef.current, { yPercent: 8, scale: 1.06, ease: "none", scrollTrigger: scrub });
+      gsap.to(ridgeRef.current, { yPercent: 22, ease: "none", scrollTrigger: scrub });
+      gsap.to(fogRef.current, { yPercent: 30, opacity: 0, ease: "none", scrollTrigger: scrub });
       gsap.to(copyRef.current, {
         yPercent: -16,
         opacity: 0,
@@ -64,23 +69,31 @@ export function Hero() {
         const layer = CLOUD_LAYERS[i];
         gsap.fromTo(
           node,
-          { xPercent: layer.drift < 0 ? 14 : -14 },
+          { xPercent: layer.drift < 0 ? 18 : -18 },
           {
-            xPercent: layer.drift < 0 ? -14 : 14,
+            xPercent: layer.drift < 0 ? -18 : 18,
             duration: layer.duration,
             ease: "none",
             repeat: -1,
             yoyo: true,
           },
         );
+        gsap.to(node, {
+          yPercent: 4,
+          duration: layer.duration / 3,
+          ease: "sine.inOut",
+          repeat: -1,
+          yoyo: true,
+        });
       });
 
-      // ---- Pointer parallax (desktop only) — only the masked ridge reacts ----
+      // ---- Pointer parallax (desktop only) — depth-map driven displacement feel ----
       if (!mobile) {
         const onMove = (e: PointerEvent) => {
           const rx = (e.clientX / window.innerWidth - 0.5) * 2;
           const ry = (e.clientY / window.innerHeight - 0.5) * 2;
-          gsap.to(ridgeRef.current, { x: rx * -26, y: ry * -14, duration: 1.2, ease: "power2.out" });
+          gsap.to(sceneRef.current, { x: rx * -10, y: ry * -6, duration: 1.2, ease: "power2.out" });
+          gsap.to(ridgeRef.current, { x: rx * -26, y: ry * -12, duration: 1.2, ease: "power2.out" });
         };
         window.addEventListener("pointermove", onMove);
         return () => window.removeEventListener("pointermove", onMove);
@@ -97,17 +110,30 @@ export function Hero() {
       aria-label="Einleitung"
       className="relative flex min-h-[640px] h-[100svh] w-full overflow-hidden bg-sky-gradient"
     >
-      {/* Static background — the full colored depth-map scene. Does NOT move. */}
-      <div aria-hidden="true" className="absolute inset-0 z-[1]">
+      {/* Distant scene — the full wallpaper, slightly oversized for parallax headroom */}
+      <div ref={sceneRef} aria-hidden="true" className="absolute inset-0 z-[2] will-change-transform">
         <img
-          src={depthMap.url}
-          alt="Berggipfel im Morgenlicht"
+          src={wallpaper.url}
+          alt="Schroffe Berggipfel im Morgennebel"
           className="h-full w-full select-none object-cover"
           fetchPriority="high"
         />
       </div>
 
-      {/* Cloud layers — drifting mist at the base of the mountains */}
+      {/* Depth-map texture — subtle grain that deepens the scene */}
+      <div
+        ref={fogRef}
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0 z-[3] mix-blend-soft-light"
+        style={{
+          backgroundImage: `url(${depthMap.url})`,
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          opacity: 0.18,
+        }}
+      />
+
+      {/* Cloud layers — drifting mist between scene and ridge */}
       {CLOUD_LAYERS.map((layer, i) => (
         <div
           key={i}
@@ -115,7 +141,7 @@ export function Hero() {
             cloudRefs.current[i] = n;
           }}
           aria-hidden="true"
-          className="pointer-events-none absolute left-1/2 z-[4] w-[170%] -translate-x-1/2 will-change-transform"
+          className="pointer-events-none absolute left-1/2 z-[4] w-[160%] -translate-x-1/2 will-change-transform"
           style={{ bottom: layer.bottom }}
         >
           <img
@@ -129,12 +155,12 @@ export function Hero() {
         </div>
       ))}
 
-      {/* Foreground ridge — the SAME scene masked to the mountains. This is the ONLY moving layer. */}
+      {/* Foreground ridge — the same wallpaper masked to the mountains, parallaxing in front */}
       <div ref={ridgeRef} aria-hidden="true" className="absolute inset-0 z-[5] will-change-transform">
         <div
           className="h-full w-full"
           style={{
-            backgroundImage: `url(${depthMap.url})`,
+            backgroundImage: `url(${wallpaper.url})`,
             backgroundSize: "cover",
             backgroundPosition: "center",
             WebkitMaskImage: `url(${mask.url})`,

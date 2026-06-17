@@ -1,4 +1,3 @@
-import { Link } from "@tanstack/react-router";
 import logoLight from "@/assets/logo_light.png.asset.json";
 
 export function Footer() {
@@ -40,9 +39,9 @@ export function Footer() {
         <div className="mt-12 flex flex-col items-start justify-between gap-4 border-t border-border pt-6 text-sm text-muted-foreground sm:flex-row sm:items-center">
           <p>© {new Date().getFullYear()} Altura Studio. Alle Rechte vorbehalten.</p>
           <nav className="flex flex-wrap gap-6" aria-label="Rechtliches">
-            <Link to="/impressum" className="story-link transition-colors hover:text-foreground">Impressum</Link>
-            <Link to="/datenschutz" className="story-link transition-colors hover:text-foreground">Datenschutz</Link>
-            <Link to="/agb" className="story-link transition-colors hover:text-foreground">AGB</Link>
+            <a href="#impressum" className="transition-colors hover:text-foreground">Impressum</a>
+            <a href="#datenschutz" className="transition-colors hover:text-foreground">Datenschutz</a>
+            <a href="#agb" className="transition-colors hover:text-foreground">AGB</a>
           </nav>
         </div>
       </div>
