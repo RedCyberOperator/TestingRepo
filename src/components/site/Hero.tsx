@@ -1,21 +1,23 @@
 import { useEffect, useRef } from "react";
 import { ArrowUpRight } from "lucide-react";
-import { ensureGsap, prefersReducedMotion, isMobileViewport } from "@/lib/gsap";
+import { ensureGsap, prefersReducedMotion } from "@/lib/gsap";
+import { DepthParallax } from "./DepthParallax";
 
+import newbg from "@/assets/newbg.png.asset.json";
 import depthMap from "@/assets/newbg_depth.png.asset.json";
-import mask from "@/assets/newbg_mask.png.asset.json";
 import cloud from "@/assets/cloud_white.webp.asset.json";
 
-/** Cloud layers — drifting mist that settles at the base of the mountains for a soft section hand-off. */
+/** Cloud puffs drifting left → right across the base of the mountains for a soft section hand-off. */
 const CLOUD_LAYERS = [
-  { bottom: "-4%", scale: 1.6, opacity: 0.85, duration: 64, drift: -1 },
-  { bottom: "4%", scale: 1.3, opacity: 0.55, duration: 52, drift: 1 },
-  { bottom: "12%", scale: 1.1, opacity: 0.35, duration: 46, drift: -1 },
+  { bottom: "-6%", width: "70%", left: "-25%", opacity: 0.95, duration: 70, scale: 1.4 },
+  { bottom: "-2%", width: "55%", left: "20%", opacity: 0.8, duration: 58, scale: 1.2 },
+  { bottom: "2%", width: "60%", left: "55%", opacity: 0.7, duration: 64, scale: 1.3 },
+  { bottom: "6%", width: "45%", left: "5%", opacity: 0.5, duration: 80, scale: 1.0 },
+  { bottom: "10%", width: "40%", left: "60%", opacity: 0.4, duration: 88, scale: 0.9 },
 ] as const;
 
 export function Hero() {
   const sectionRef = useRef<HTMLElement>(null);
-  const ridgeRef = useRef<HTMLDivElement>(null);
   const copyRef = useRef<HTMLDivElement>(null);
   const cloudRefs = useRef<Array<HTMLDivElement | null>>([]);
 
@@ -25,7 +27,6 @@ export function Hero() {
     if (prefersReducedMotion()) return;
 
     const { gsap, ScrollTrigger } = ensureGsap();
-    const mobile = isMobileViewport();
 
     const ctx = gsap.context(() => {
       // ---- Entrance: fade-in + translateY, stagger, power2.out ----
@@ -42,49 +43,24 @@ export function Hero() {
         });
       }
 
-      const scrub = {
-        trigger: section,
-        start: "top top",
-        end: "bottom top",
-        scrub: mobile ? true : 0.6,
-      } as const;
-
-      // ---- Scroll parallax: ONLY the masked foreground ridge moves ----
-      gsap.to(ridgeRef.current, { yPercent: 16, scale: 1.08, ease: "none", scrollTrigger: scrub });
+      // ---- Copy fades out on scroll ----
       gsap.to(copyRef.current, {
         yPercent: -16,
         opacity: 0,
         ease: "none",
-        scrollTrigger: { ...scrub, end: "70% top" },
+        scrollTrigger: { trigger: section, start: "top top", end: "70% top", scrub: 0.6 },
       });
 
-      // ---- Cloud drift (continuous) ----
+      // ---- Cloud drift: continuous left → right ----
       cloudRefs.current.forEach((node, i) => {
         if (!node) return;
         const layer = CLOUD_LAYERS[i];
         gsap.fromTo(
           node,
-          { xPercent: layer.drift < 0 ? 14 : -14 },
-          {
-            xPercent: layer.drift < 0 ? -14 : 14,
-            duration: layer.duration,
-            ease: "none",
-            repeat: -1,
-            yoyo: true,
-          },
+          { xPercent: -120 },
+          { xPercent: 120, duration: layer.duration, ease: "none", repeat: -1 },
         );
       });
-
-      // ---- Pointer parallax (desktop only) — only the masked ridge reacts ----
-      if (!mobile) {
-        const onMove = (e: PointerEvent) => {
-          const rx = (e.clientX / window.innerWidth - 0.5) * 2;
-          const ry = (e.clientY / window.innerHeight - 0.5) * 2;
-          gsap.to(ridgeRef.current, { x: rx * -26, y: ry * -14, duration: 1.2, ease: "power2.out" });
-        };
-        window.addEventListener("pointermove", onMove);
-        return () => window.removeEventListener("pointermove", onMove);
-      }
     }, section);
 
     ScrollTrigger.refresh();
@@ -97,17 +73,10 @@ export function Hero() {
       aria-label="Einleitung"
       className="relative flex min-h-[640px] h-[100svh] w-full overflow-hidden bg-sky-gradient"
     >
-      {/* Static background — the full colored depth-map scene. Does NOT move. */}
-      <div aria-hidden="true" className="absolute inset-0 z-[1]">
-        <img
-          src={depthMap.url}
-          alt="Berggipfel im Morgenlicht"
-          className="h-full w-full select-none object-cover"
-          fetchPriority="high"
-        />
-      </div>
+      {/* Depth-map driven, mouse-parallax mountain scene. */}
+      <DepthParallax image={newbg.url} depth={depthMap.url} className="absolute inset-0 z-[1]" />
 
-      {/* Cloud layers — drifting mist at the base of the mountains */}
+      {/* Cloud layers — drifting mist sweeping left → right at the base of the mountains */}
       {CLOUD_LAYERS.map((layer, i) => (
         <div
           key={i}
@@ -115,8 +84,8 @@ export function Hero() {
             cloudRefs.current[i] = n;
           }}
           aria-hidden="true"
-          className="pointer-events-none absolute left-1/2 z-[4] w-[170%] -translate-x-1/2 will-change-transform"
-          style={{ bottom: layer.bottom }}
+          className="pointer-events-none absolute z-[4] will-change-transform"
+          style={{ bottom: layer.bottom, left: layer.left, width: layer.width }}
         >
           <img
             src={cloud.url}
@@ -129,28 +98,8 @@ export function Hero() {
         </div>
       ))}
 
-      {/* Foreground ridge — the SAME scene masked to the mountains. This is the ONLY moving layer. */}
-      <div ref={ridgeRef} aria-hidden="true" className="absolute inset-0 z-[5] will-change-transform">
-        <div
-          className="h-full w-full"
-          style={{
-            backgroundImage: `url(${depthMap.url})`,
-            backgroundSize: "cover",
-            backgroundPosition: "center",
-            WebkitMaskImage: `url(${mask.url})`,
-            maskImage: `url(${mask.url})`,
-            WebkitMaskSize: "cover",
-            maskSize: "cover",
-            WebkitMaskPosition: "center",
-            maskPosition: "center",
-            WebkitMaskRepeat: "no-repeat",
-            maskRepeat: "no-repeat",
-          }}
-        />
-      </div>
-
       {/* Soft fade into the next section */}
-      <div aria-hidden="true" className="absolute inset-x-0 bottom-0 z-[6] h-32 bg-fade-gradient" />
+      <div aria-hidden="true" className="absolute inset-x-0 bottom-0 z-[6] h-40 bg-fade-gradient" />
 
       {/* Copy — headline top-left, meta bottom row */}
       <div

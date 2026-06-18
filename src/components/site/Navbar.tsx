@@ -34,7 +34,7 @@ export function Navbar() {
       <nav className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
         <a href="#top" className="flex items-center gap-2.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring rounded-md">
           <img src={logoDark.url} alt="" width={28} height={28} className="h-7 w-7" />
-          <span className="font-display text-lg tracking-tight text-foreground">Altura</span>
+          <span className="font-display text-lg tracking-tight text-foreground">F&V Webseiten</span>
         </a>
 
         <ul className="hidden items-center gap-8 md:flex">
