@@ -53,10 +53,13 @@ function Index() {
       <Navbar />
       <main>
         <Hero />
-        <ZoomReveal
-          text="Wir sind ein Team aus erfahrenen Gestaltern und Entwicklern mit langjähriger Erfahrung in digitalen Markenauftritten und performanten Websites."
-          className="font-sans text-2xl font-bold leading-[1.15] tracking-[-0.02em] text-foreground sm:text-3xl md:text-4xl"
-        />
+        <section className="mx-auto flex min-h-[80vh] max-w-5xl items-center px-6 py-32 sm:px-10">
+          <ScrollText
+            text="Wir sind ein Team aus erfahrenen Gestaltern und Entwicklern mit langjähriger Erfahrung in digitalen Markenauftritten und performanten Websites."
+            className="justify-center text-center font-sans text-3xl font-bold leading-[1.15] tracking-[-0.02em] text-foreground sm:text-4xl md:text-5xl"
+          />
+        </section>
+
         <Services />
         <ScrollGallery />
         <Portfolio />
