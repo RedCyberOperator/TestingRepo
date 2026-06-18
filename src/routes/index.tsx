@@ -8,7 +8,8 @@ import { Process } from "@/components/site/Process";
 import { Pricing } from "@/components/site/Pricing";
 import { Testimonials } from "@/components/site/Testimonials";
 import { Team } from "@/components/site/Team";
-import { ZoomReveal } from "@/components/site/ZoomReveal";
+import { ScrollText } from "@/components/site/ScrollText";
+
 
 import { Contact } from "@/components/site/Contact";
 import { Footer } from "@/components/site/Footer";
