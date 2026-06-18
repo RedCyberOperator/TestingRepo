@@ -18,7 +18,7 @@ import { CookieBanner } from "@/components/site/CookieBanner";
 const orgJsonLd = {
   "@context": "https://schema.org",
   "@type": "Organization",
-  name: "Altura Studio",
+  name: "F&V Webseiten",
   description:
     "Webdesign-Agentur für minimalistische, performante Websites. Strategie, Design und Entwicklung — Kauf oder Leasing.",
   email: "hallo@altura.studio",
@@ -29,13 +29,13 @@ const orgJsonLd = {
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Altura — Webdesign-Agentur für ruhige, hochwertige Websites" },
+      { title: "F&V Webseiten — Webdesign-Agentur für ruhige, hochwertige Websites" },
       {
         name: "description",
         content:
-          "Altura gestaltet minimalistische, schnelle Websites mit Charakter. Strategie, Design und Entwicklung aus einer Hand — als Kauf oder Leasing.",
+          "F&V Webseiten gestaltet minimalistische, schnelle Websites mit Charakter. Strategie, Design und Entwicklung aus einer Hand — als Kauf oder Leasing.",
       },
-      { property: "og:title", content: "Altura — Webdesign-Agentur" },
+      { property: "og:title", content: "F&V Webseiten — Webdesign-Agentur" },
       {
         property: "og:description",
         content: "Minimalistische, performante Markenauftritte. Kauf oder Leasing.",

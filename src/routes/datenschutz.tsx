@@ -4,10 +4,10 @@ import { LegalLayout, LegalSection } from "@/components/site/LegalLayout";
 export const Route = createFileRoute("/datenschutz")({
   head: () => ({
     meta: [
-      { title: "Datenschutz — Altura Studio" },
-      { name: "description", content: "Datenschutzerklärung der Altura Studio Webdesign-Agentur gemäß DSGVO." },
-      { property: "og:title", content: "Datenschutz — Altura Studio" },
-      { property: "og:description", content: "Datenschutzerklärung der Altura Studio gemäß DSGVO." },
+      { title: "Datenschutz — F&V Webseiten" },
+      { name: "description", content: "Datenschutzerklärung der F&V Webseiten Webdesign-Agentur gemäß DSGVO." },
+      { property: "og:title", content: "Datenschutz — F&V Webseiten" },
+      { property: "og:description", content: "Datenschutzerklärung der F&V Webseiten gemäß DSGVO." },
     ],
   }),
   component: DatenschutzPage,
@@ -21,7 +21,7 @@ function DatenschutzPage() {
     >
       <LegalSection heading="Verantwortliche Stelle">
         <p>
-          Verantwortlich für die Datenverarbeitung auf dieser Website ist Altura Studio, Musterstraße 1, 0000 Musterstadt,
+          Verantwortlich für die Datenverarbeitung auf dieser Website ist F&V Webseiten, Musterstraße 1, 0000 Musterstadt,
           E-Mail: hallo@altura.studio.
         </p>
       </LegalSection>

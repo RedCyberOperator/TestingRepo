@@ -4,10 +4,10 @@ import { LegalLayout, LegalSection } from "@/components/site/LegalLayout";
 export const Route = createFileRoute("/agb")({
   head: () => ({
     meta: [
-      { title: "AGB — Altura Studio" },
-      { name: "description", content: "Allgemeine Geschäftsbedingungen der Altura Studio Webdesign-Agentur." },
-      { property: "og:title", content: "AGB — Altura Studio" },
-      { property: "og:description", content: "Allgemeine Geschäftsbedingungen der Altura Studio." },
+      { title: "AGB — F&V Webseiten" },
+      { name: "description", content: "Allgemeine Geschäftsbedingungen der F&V Webseiten Webdesign-Agentur." },
+      { property: "og:title", content: "AGB — F&V Webseiten" },
+      { property: "og:description", content: "Allgemeine Geschäftsbedingungen der F&V Webseiten." },
     ],
   }),
   component: AgbPage,
@@ -21,7 +21,7 @@ function AgbPage() {
     >
       <LegalSection heading="1. Geltungsbereich">
         <p>
-          Diese Allgemeinen Geschäftsbedingungen gelten für alle Verträge zwischen Altura Studio und ihren Kund:innen über
+          Diese Allgemeinen Geschäftsbedingungen gelten für alle Verträge zwischen F&V Webseiten und ihren Kund:innen über
           die Erbringung von Design- und Entwicklungsleistungen.
         </p>
       </LegalSection>
@@ -50,13 +50,13 @@ function AgbPage() {
       <LegalSection heading="5. Nutzungsrechte">
         <p>
           Mit vollständiger Bezahlung werden die vereinbarten Nutzungsrechte übertragen. Beim Leasing verbleiben die Rechte
-          bis zum Ende der Laufzeit bei Altura Studio.
+          bis zum Ende der Laufzeit bei F&V Webseiten.
         </p>
       </LegalSection>
 
       <LegalSection heading="6. Haftung">
         <p>
-          Altura Studio haftet nur für Schäden, die auf vorsätzlichem oder grob fahrlässigem Verhalten beruhen, im Rahmen
+          F&V Webseiten haftet nur für Schäden, die auf vorsätzlichem oder grob fahrlässigem Verhalten beruhen, im Rahmen
           der gesetzlichen Bestimmungen.
         </p>
       </LegalSection>

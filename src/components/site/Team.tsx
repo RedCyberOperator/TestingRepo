@@ -34,7 +34,7 @@ export function Team() {
         <Reveal stagger>
           <p className="eyebrow text-accent">Team</p>
           <h2 className="mt-4 text-balance text-3xl text-foreground sm:text-4xl md:text-5xl">
-            Die Menschen hinter Altura.
+            Die Menschen hinter F&V Webseiten.
           </h2>
         </Reveal>
 

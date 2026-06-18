@@ -4,10 +4,10 @@ import { LegalLayout, LegalSection } from "@/components/site/LegalLayout";
 export const Route = createFileRoute("/impressum")({
   head: () => ({
     meta: [
-      { title: "Impressum — Altura Studio" },
-      { name: "description", content: "Anbieterkennzeichnung und rechtliche Angaben der Altura Studio Webdesign-Agentur." },
-      { property: "og:title", content: "Impressum — Altura Studio" },
-      { property: "og:description", content: "Anbieterkennzeichnung und rechtliche Angaben der Altura Studio." },
+      { title: "Impressum — F&V Webseiten" },
+      { name: "description", content: "Anbieterkennzeichnung und rechtliche Angaben der F&V Webseiten Webdesign-Agentur." },
+      { property: "og:title", content: "Impressum — F&V Webseiten" },
+      { property: "og:description", content: "Anbieterkennzeichnung und rechtliche Angaben der F&V Webseiten." },
     ],
   }),
   component: ImpressumPage,
@@ -20,7 +20,7 @@ function ImpressumPage() {
       subtitle="Angaben gemäß § 5 TMG. Bitte ersetzen Sie die Platzhalter durch Ihre echten Unternehmensdaten."
     >
       <LegalSection heading="Anbieter">
-        <p>Altura Studio</p>
+        <p>F&V Webseiten</p>
         <p>Musterstraße 1</p>
         <p>0000 Musterstadt</p>
         <p>Österreich / Deutschland / Schweiz</p>

@@ -11,7 +11,7 @@ export function Footer() {
               <span className="flex h-7 w-7 items-center justify-center rounded-full bg-primary">
                 <img src={logoLight.url} alt="" width={18} height={18} className="h-[18px] w-[18px]" />
               </span>
-              <span className="font-display text-lg text-foreground">Altura</span>
+              <span className="font-display text-lg text-foreground">F&V Webseiten</span>
             </div>
             <p className="mt-4 max-w-xs text-sm text-muted-foreground">
               Webdesign-Studio für ruhige, hochwertige und schnelle Markenauftritte.
@@ -38,7 +38,7 @@ export function Footer() {
         </div>
 
         <div className="mt-12 flex flex-col items-start justify-between gap-4 border-t border-border pt-6 text-sm text-muted-foreground sm:flex-row sm:items-center">
-          <p>© {new Date().getFullYear()} Altura Studio. Alle Rechte vorbehalten.</p>
+          <p>© {new Date().getFullYear()} F&V Webseiten. Alle Rechte vorbehalten.</p>
           <nav className="flex flex-wrap gap-6" aria-label="Rechtliches">
             <Link to="/impressum" className="story-link transition-colors hover:text-foreground">Impressum</Link>
             <Link to="/datenschutz" className="story-link transition-colors hover:text-foreground">Datenschutz</Link>

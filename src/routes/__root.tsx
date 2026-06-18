@@ -77,15 +77,15 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Altura — Webdesign-Agentur für ruhige, hochwertige Markenauftritte" },
+      { title: "F&V Webseiten — Webdesign-Agentur für ruhige, hochwertige Markenauftritte" },
       {
         name: "description",
         content:
-          "Altura ist eine Webdesign-Agentur für minimalistische, performante Websites. Strategie, Design und Entwicklung — Kauf oder Leasing.",
+          "F&V Webseiten ist eine Webdesign-Agentur für minimalistische, performante Websites. Strategie, Design und Entwicklung — Kauf oder Leasing.",
       },
-      { name: "author", content: "Altura" },
+      { name: "author", content: "F&V Webseiten" },
       { name: "theme-color", content: "#fbfbfc" },
-      { property: "og:title", content: "Altura — Webdesign-Agentur" },
+      { property: "og:title", content: "F&V Webseiten — Webdesign-Agentur" },
       {
         property: "og:description",
         content:
