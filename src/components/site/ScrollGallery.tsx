@@ -88,6 +88,14 @@ export function ScrollGallery() {
     return () => ctx.revert();
   }, []);
 
+  /** Jump straight to a given slide's pinned scroll position. */
+  const jumpTo = (i: number) => {
+    const section = sectionRef.current;
+    if (!section) return;
+    const top = section.offsetTop + i * window.innerHeight + 2;
+    window.scrollTo({ top, behavior: "smooth" });
+  };
+
   return (
     <section
       ref={sectionRef}
@@ -109,17 +117,23 @@ export function ScrollGallery() {
             {/* Overlay layout — matches reference: index + nav top-left, giant title centered,
                 description + link bottom-left, stats column right. */}
             <div className="absolute inset-0 mx-auto flex w-full max-w-[1500px] flex-col px-6 py-10 text-primary-foreground sm:px-10 sm:py-14">
-              {/* Top-left: section list */}
-              <nav aria-hidden="true" className="hidden flex-col gap-1 text-sm sm:flex">
+              {/* Top-left: clickable section list — jumps between slides */}
+              <nav className="mt-[14vh] hidden flex-col items-start gap-1.5 text-sm sm:flex">
                 {SLIDES.map((s, j) => (
-                  <span
+                  <button
                     key={j}
-                    className={j === i ? "font-semibold text-primary-foreground" : "text-primary-foreground/45"}
+                    type="button"
+                    onClick={() => jumpTo(j)}
+                    className={
+                      "text-left transition-colors hover:text-primary-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-primary-foreground/60 " +
+                      (j === i ? "font-semibold text-primary-foreground" : "text-primary-foreground/45")
+                    }
                   >
                     {s.title}
-                  </span>
+                  </button>
                 ))}
               </nav>
+
 
               {/* Giant title */}
               <div className="pointer-events-none flex flex-1 items-center">
