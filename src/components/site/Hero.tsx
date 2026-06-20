@@ -140,14 +140,14 @@ export function Hero() {
           </p>
 
           <div data-hero-line className="max-w-sm sm:text-right">
-            <p className="text-pretty text-base text-white/85 [text-shadow:0_1px_12px_rgba(0,0,0,0.45)] sm:text-lg">
+            <p className="text-pretty text-base text-slate-950 sm:text-lg">
               Minimalistische, schnelle Markenauftritte — klar im Design, fundiert in der
               Technik. Strategie, Gestaltung und Entwicklung aus einer Hand.
             </p>
             <div className="mt-6 flex flex-wrap items-center gap-4 sm:justify-end">
               <a
                 href="#kontakt"
-                className="group inline-flex items-center gap-2 border-b border-white/50 pb-1 text-sm font-semibold text-white transition-colors hover:border-white [text-shadow:0_1px_12px_rgba(0,0,0,0.45)]"
+                className="rounded-full bg-primary px-5 py-2.5 text-sm font-semibold text-primary-foreground inline-flex items-center gap-2 transition-transform duration-300 hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
               >
                 Projekt anfragen
                 <ArrowUpRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
