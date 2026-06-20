@@ -1,4 +1,12 @@
 import { createStart, createMiddleware } from "@tanstack/react-start";
+// Local font imports (bundled via @fontsource)
+import "@fontsource/manrope/400.css";
+import "@fontsource/manrope/500.css";
+import "@fontsource/manrope/600.css";
+import "@fontsource/manrope/700.css";
+import "@fontsource/fraunces/300.css";
+import "@fontsource/fraunces/400.css";
+import "@fontsource/fraunces/600.css";
 
 import { renderErrorPage } from "./lib/error-page";
 
