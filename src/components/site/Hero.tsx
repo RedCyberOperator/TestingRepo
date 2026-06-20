@@ -3,9 +3,9 @@ import { ArrowUpRight } from "lucide-react";
 import { ensureGsap, prefersReducedMotion } from "@/lib/gsap";
 import { DepthParallax } from "./DepthParallax";
 
-import newbg from "@/assets/newbg.png.asset.json";
-import depthMap from "@/assets/newbg_depth.png.asset.json";
-import cloud from "@/assets/cloud_white.webp.asset.json";
+import newbg from "@/assets/newbg.png";
+import depthMap from "@/assets/newbg_depthmap.png";
+import cloud from "@/assets/cloud_white.png";
 
 /**
  * Cloud puffs drifting endlessly left → right across the base of the mountains.
@@ -88,7 +88,7 @@ export function Hero() {
       className="relative flex min-h-[640px] h-[100svh] w-full overflow-hidden bg-sky-gradient"
     >
       {/* Depth-map driven, mouse-parallax mountain scene (subtle movement only). */}
-      <DepthParallax image={newbg.url} depth={depthMap.url} amount={0.022} className="absolute inset-0 z-[1]" />
+      <DepthParallax image={newbg} depth={depthMap} amount={0.022} className="absolute inset-0 z-[1]" />
 
       {/* Cloud layers — endlessly drifting mist sweeping left → right at the base of the mountains */}
       {CLOUD_LAYERS.map((layer, i) => (
@@ -102,7 +102,7 @@ export function Hero() {
           style={{ bottom: layer.bottom, width: `${layer.widthVw}vw` }}
         >
           <img
-            src={cloud.url}
+            src={cloud}
             alt=""
             width={1096}
             height={418}

@@ -1,5 +1,5 @@
 import { Link } from "@tanstack/react-router";
-import logoLight from "@/assets/logo_light.png.asset.json";
+import logoLight from "@/assets/Logo.png";
 
 export function Footer() {
   return (
@@ -9,7 +9,7 @@ export function Footer() {
           <div className="md:col-span-1">
             <div className="flex items-center gap-2.5">
               <span className="flex h-7 w-7 items-center justify-center rounded-full bg-primary">
-                <img src={logoLight.url} alt="" width={18} height={18} className="h-[18px] w-[18px]" />
+                <img src={logoLight} alt="" width={18} height={18} className="h-[18px] w-[18px]" />
               </span>
               <span className="font-display text-lg text-foreground">F&V Webseiten</span>
             </div>
