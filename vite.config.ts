@@ -12,4 +12,6 @@ export default defineConfig({
     // nitro/vite builds from this
     server: { entry: "server" },
   },
+  // ERZWINGT DEN NITRO-BUILD FÜR CLOUDFLARE AUSSERHALB VON LOVABLE
+  nitro: true,
 });
