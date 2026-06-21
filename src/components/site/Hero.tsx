@@ -8,7 +8,7 @@ import depthMap from "@/assets/newbg_depthmap.png";
 import cloud from "@/assets/cloud_white.png";
 
 /**
- * Cloud puffs drifting endlessly left → right across the base of the mountains.
+ * Cloud puffs drifting endlessly left -> right across the base of the mountains.
  * Each cloud starts fully off-screen left and ends fully off-screen right, so the
  * infinite loop reset is never visible. `start` spreads the loop progress so the
  * sky always has coverage without all clouds clumping together.
@@ -36,7 +36,6 @@ export function Hero() {
     const { gsap, ScrollTrigger } = ensureGsap();
 
     const ctx = gsap.context(() => {
-      // ---- Entrance: fade-in + translateY, stagger, power2.out ----
       if (copyRef.current) {
         const lines = copyRef.current.querySelectorAll("[data-hero-line]");
         gsap.set(lines, { opacity: 0, y: 24 });
@@ -50,7 +49,6 @@ export function Hero() {
         });
       }
 
-      // ---- Copy fades out on scroll ----
       gsap.to(copyRef.current, {
         yPercent: -16,
         opacity: 0,
@@ -58,7 +56,6 @@ export function Hero() {
         scrollTrigger: { trigger: section, start: "top top", end: "70% top", scrub: 0.6 },
       });
 
-      // ---- Cloud drift: continuous, never-resetting left → right loop ----
       cloudRefs.current.forEach((node, i) => {
         if (!node) return;
         const layer = CLOUD_LAYERS[i];
@@ -72,7 +69,6 @@ export function Hero() {
             repeat: -1,
           },
         );
-        // Offset each cloud's loop position so coverage is continuous and resets stay off-screen.
         tween.progress(layer.start);
       });
     }, section);
@@ -87,10 +83,8 @@ export function Hero() {
       aria-label="Einleitung"
       className="relative flex min-h-[640px] h-[100svh] w-full overflow-hidden bg-sky-gradient"
     >
-      {/* Depth-map driven, mouse-parallax mountain scene (subtle movement only). */}
       <DepthParallax image={newbg} depth={depthMap} amount={0.022} className="absolute inset-0 z-[1]" />
 
-      {/* Cloud layers — endlessly drifting mist sweeping left → right at the base of the mountains */}
       {CLOUD_LAYERS.map((layer, i) => (
         <div
           key={i}
@@ -112,10 +106,8 @@ export function Hero() {
         </div>
       ))}
 
-      {/* Soft fade into the next section — taller, gentler blend to hide any hard cut */}
       <div aria-hidden="true" className="absolute inset-x-0 bottom-0 z-[6] h-72 bg-fade-gradient" />
 
-      {/* Copy — headline top-left, meta bottom row */}
       <div
         ref={copyRef}
         className="relative z-[7] mx-auto flex w-full max-w-[1500px] flex-col px-6 pb-10 pt-28 will-change-transform sm:px-10 md:pt-32"
@@ -124,16 +116,17 @@ export function Hero() {
           data-hero-line
           className="eyebrow mb-6 text-white/85 [text-shadow:0_1px_12px_rgba(0,0,0,0.45)]"
         >
-          Webdesign-Studio · Alpenraum
+          Webdesign-Studio
         </p>
         <h1
           data-hero-line
           className="max-w-[14ch] font-sans font-bold leading-[0.92] tracking-[-0.03em] text-white [text-shadow:0_2px_24px_rgba(0,0,0,0.45)] text-[clamp(3rem,11vw,9.5rem)]"
         >
-          Höhe und Ruhe
+          We Create
+          <br />
+          Experiences
         </h1>
 
-        {/* Bottom row */}
         <div className="mt-auto flex flex-col gap-10 pt-16 sm:flex-row sm:items-end sm:justify-between">
           <p data-hero-line className="eyebrow text-white/70 [text-shadow:0_1px_12px_rgba(0,0,0,0.45)]">
             Scroll
@@ -147,7 +140,7 @@ export function Hero() {
             <div className="mt-6 flex flex-wrap items-center gap-4 sm:justify-end">
               <a
                 href="#kontakt"
-                className="rounded-full bg-primary px-5 py-2.5 text-sm font-semibold text-primary-foreground inline-flex items-center gap-2 transition-transform duration-300 hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                className="inline-flex items-center gap-2 rounded-full bg-primary px-5 py-2.5 text-sm font-semibold text-primary-foreground transition-transform duration-300 hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
               >
                 Projekt anfragen
                 <ArrowUpRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
