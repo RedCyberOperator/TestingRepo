@@ -26,11 +26,11 @@ export function Contact() {
             Erzählen Sie kurz von Ihrem Vorhaben. Wir melden uns innerhalb von zwei Werktagen.
           </p>
           <div className="mt-8 space-y-3 text-sm">
-            <a href="mailto:hallo@altura.studio" className="flex items-center gap-3 text-primary-foreground/80 transition-colors hover:text-primary-foreground">
-              <Mail className="h-4 w-4" aria-hidden="true" /> hallo@altura.studio
+            <a href="mailto:info@fv-webseiten.com" className="flex items-center gap-3 text-primary-foreground/80 transition-colors hover:text-primary-foreground">
+              <Mail className="h-4 w-4" aria-hidden="true" /> info@fv-webseiten.com
             </a>
             <p className="flex items-center gap-3 text-primary-foreground/80">
-              <MapPin className="h-4 w-4" aria-hidden="true" /> Innsbruck · Remote im DACH-Raum
+              <MapPin className="h-4 w-4" aria-hidden="true" /> Deutschland · Remote im DACH-Raum
             </p>
           </div>
         </Reveal>

@@ -22,7 +22,7 @@ const orgJsonLd = {
   name: "F&V Webseiten",
   description:
     "Webdesign-Agentur für minimalistische, performante Websites. Strategie, Design und Entwicklung — Kauf oder Leasing.",
-  email: "hallo@altura.studio",
+  email: "info@fv-webseiten.com",
   areaServed: "DACH",
   knowsAbout: ["Webdesign", "Webentwicklung", "Branding", "SEO"],
 };
