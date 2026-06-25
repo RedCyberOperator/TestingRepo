@@ -41,7 +41,7 @@ export function Navbar() {
             alt=""
             width={28}
             height={28}
-            className="h-7 w-7 drop-shadow-[0_2px_8px_rgba(0,0,0,0.35)]"
+            className="h-7 w-auto drop-shadow-[0_2px_8px_rgba(0,0,0,0.35)]"
           />
           <span className="font-display text-lg tracking-tight text-white drop-shadow-[0_1px_8px_rgba(0,0,0,0.35)]">
             F&V Webseiten

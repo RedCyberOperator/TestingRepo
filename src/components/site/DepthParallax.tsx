@@ -141,6 +141,9 @@ export function DepthParallax({ image, depth, amount = 0.045, className }: Depth
       target.x = 0;
       target.y = 0;
     };
+    const onPageShow = () => {
+      resize();
+    };
 
     Promise.all([loadTexture(gl, image), loadTexture(gl, depth)]).then(([imgTex, depthTex]) => {
       if (disposed) return;
@@ -173,9 +176,14 @@ export function DepthParallax({ image, depth, amount = 0.045, className }: Depth
       render();
     });
 
+    window.addEventListener("pageshow", onPageShow);
+    window.addEventListener("resize", resize);
+
     return () => {
       disposed = true;
       cancelAnimationFrame(raf);
+      window.removeEventListener("pageshow", onPageShow);
+      window.removeEventListener("resize", resize);
       window.removeEventListener("pointermove", onMove);
       window.removeEventListener("pointerleave", onLeave);
     };

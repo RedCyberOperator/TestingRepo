@@ -54,7 +54,7 @@ export function LegalLayout({ title, subtitle, children }: LegalLayoutProps) {
       <header className="border-b border-border">
         <div className="mx-auto flex max-w-4xl items-center justify-between px-6 py-5">
           <Link to="/" className="flex items-center gap-2.5">
-            <img src={logoDark} alt="" width={28} height={28} className="h-7 w-7" />
+            <img src={logoDark} alt="" width={28} height={28} className="h-7 w-auto" />
             <span className="font-display text-lg tracking-tight text-foreground">F&V Webseiten</span>
           </Link>
           <Link

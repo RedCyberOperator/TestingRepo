@@ -73,8 +73,16 @@ export function Hero() {
       });
     }, section);
 
+    const onPageShow = () => {
+      ScrollTrigger.refresh();
+    };
+
+    window.addEventListener("pageshow", onPageShow);
     ScrollTrigger.refresh();
-    return () => ctx.revert();
+    return () => {
+      window.removeEventListener("pageshow", onPageShow);
+      ctx.revert();
+    };
   }, []);
 
   return (
@@ -127,11 +135,7 @@ export function Hero() {
           Experiences
         </h1>
 
-        <div className="mt-auto flex flex-col gap-10 pt-16 sm:flex-row sm:items-end sm:justify-between">
-          <p data-hero-line className="eyebrow text-white/70 [text-shadow:0_1px_12px_rgba(0,0,0,0.45)]">
-            Scroll
-          </p>
-
+        <div className="mt-auto flex flex-col gap-10 pt-16 sm:flex-row sm:items-end sm:justify-end">
           <div data-hero-line className="max-w-sm sm:text-right">
             <p className="text-pretty text-base text-slate-950 sm:text-lg">
               Minimalistische, schnelle Markenauftritte — klar im Design, fundiert in der

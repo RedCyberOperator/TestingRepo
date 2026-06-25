@@ -9,7 +9,7 @@ export function Footer() {
           <div className="md:col-span-1">
             <div className="flex items-center gap-2.5">
               <span className="flex h-7 w-7 items-center justify-center rounded-full bg-primary">
-                <img src={logoLight} alt="" width={18} height={18} className="h-[18px] w-[18px]" />
+                <img src={logoLight} alt="" width={18} height={18} className="h-[18px] w-auto max-w-none" />
               </span>
               <span className="font-display text-lg text-foreground">F&V Webseiten</span>
             </div>
