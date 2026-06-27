@@ -26,8 +26,13 @@ export function Footer() {
               (Mindestlaufzeit 12 Monate).
             </p>
             <p className="mt-3 leading-relaxed">
+              <strong className="font-medium text-foreground">Digitalbonus Bayern:</strong> Für KMU mit Sitz in Bayern kann ein
+              förderfähiges Digitalprojekt je nach Vorhaben zuschussfähig sein. Ob und in welcher Höhe der Zuschuss bewilligt wird,
+              hängt von den jeweiligen Voraussetzungen und dem Antrag ab.
+            </p>
+            <p className="mt-3 leading-relaxed">
               <strong className="font-medium text-foreground">Hosting &amp; Domain:</strong> Domains können per Transfer zu uns
-              umgezogen oder bei Ihnen belassen werden — in dem Fall verbinden wir die Website nur per DNS. Details in der README
+              umgezogen oder bei Ihnen belassen werden - in dem Fall verbinden wir die Website nur per DNS. Details in der README
               und im Übergabe-Paket.
             </p>
             <p className="mt-3 leading-relaxed">
@@ -40,9 +45,15 @@ export function Footer() {
         <div className="mt-12 flex flex-col items-start justify-between gap-4 border-t border-border pt-6 text-sm text-muted-foreground sm:flex-row sm:items-center">
           <p>© {new Date().getFullYear()} F&V Webseiten. Alle Rechte vorbehalten.</p>
           <nav className="flex flex-wrap gap-6" aria-label="Rechtliches">
-            <Link to="/impressum" className="story-link transition-colors hover:text-foreground">Impressum</Link>
-            <Link to="/datenschutz" className="story-link transition-colors hover:text-foreground">Datenschutz</Link>
-            <Link to="/agb" className="story-link transition-colors hover:text-foreground">AGB</Link>
+            <Link to="/impressum" className="story-link transition-colors hover:text-foreground">
+              Impressum
+            </Link>
+            <Link to="/datenschutz" className="story-link transition-colors hover:text-foreground">
+              Datenschutz
+            </Link>
+            <Link to="/agb" className="story-link transition-colors hover:text-foreground">
+              AGB
+            </Link>
           </nav>
         </div>
       </div>

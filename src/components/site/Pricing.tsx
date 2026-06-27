@@ -8,8 +8,16 @@ const PLANS = [
     price: "ab 6.900 €",
     note: "einmalig",
     desc: "Die Website gehört vollständig Ihnen. Einmalige Investition, volle Kontrolle.",
-    features: ["Individuelles Design & Entwicklung", "Quellcode-Übergabe", "Einmalzahlung", "Optionale Wartung separat"],
+    features: [
+      "Individuelles Design & Entwicklung",
+      "Quellcode-Übergabe",
+      "Einmalzahlung",
+      "Optionale Wartung separat",
+      "Fördercheck für Digitalbonus Bayern",
+    ],
     highlight: false,
+    noteLine:
+      "Für KMU in Bayern kann der Digitalbonus Bayern bei förderfähigen Digitalprojekten infrage kommen, oft bis zu 50 % der zuwendungsfähigen Ausgaben.",
   },
   {
     name: "Leasing",
@@ -19,7 +27,7 @@ const PLANS = [
     features: ["Kein hoher Startbetrag", "Hosting & Wartung inklusive", "Laufende Optimierung", "Mindestlaufzeit 12 Monate"],
     highlight: true,
   },
-];
+] as const;
 
 export function Pricing() {
   return (
@@ -28,7 +36,7 @@ export function Pricing() {
         <SectionHeading
           eyebrow="Modelle"
           title="Kauf oder Leasing."
-          intro="Zwei Wege zur eigenen Website — passend zu Budget und Bedarf."
+          intro="Zwei Wege zur eigenen Website, passend zu Budget und Bedarf."
           align="center"
         />
         <Reveal stagger className="mt-14 grid grid-cols-1 gap-6 md:grid-cols-2">
@@ -48,6 +56,11 @@ export function Pricing() {
                 <span className="text-sm text-muted-foreground">{p.note}</span>
               </p>
               <p className="mt-4 text-sm text-muted-foreground">{p.desc}</p>
+              {"noteLine" in p ? (
+                <p className="mt-4 rounded-lg border border-border/60 bg-secondary/40 px-4 py-3 text-sm text-muted-foreground">
+                  {p.noteLine}
+                </p>
+              ) : null}
               <ul className="mt-6 space-y-3">
                 {p.features.map((f) => (
                   <li key={f} className="flex items-start gap-3 text-sm text-foreground">

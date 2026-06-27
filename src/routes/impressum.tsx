@@ -17,7 +17,7 @@ function ImpressumPage() {
   return (
     <LegalLayout
       title="Impressum"
-      subtitle="Angaben gemäß § 5 TMG. Bitte ersetzen Sie die Platzhalter durch Ihre echten Unternehmensdaten."
+      subtitle="Angaben gemäß § 5 TMG."
     >
       <LegalSection heading="Anbieter">
         <p>Vinzent & Felix Breitenstein GbR</p>
