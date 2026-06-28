@@ -12,14 +12,14 @@ type Member = {
 
 const MEMBERS: Member[] = [
   {
-    name: "Vasil Peres",
-    role: "Analista DDO",
+    name: "Felix Breitenstein",
+    role: "Developer & Designer",
     image: person1,
     linkedin: "https://www.linkedin.com/",
   },
   {
-    name: "Marta Nogueira",
-    role: "Head of Design",
+    name: "Vinzent Breitenstein",
+    role: "Sales & Marketing",
     image: person2,
     linkedin: "https://www.linkedin.com/",
   },

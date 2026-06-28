@@ -13,11 +13,11 @@ const PLANS = [
       "Quellcode-Übergabe",
       "Einmalzahlung",
       "Optionale Wartung separat",
-      "Digitalbonus Bayern geprüft",
+      "SEO-Optimierung & Performance-Check",
     ],
     highlight: false,
     noteLine:
-      "Für KMU in Bayern kann der Digitalbonus Bayern bei förderfähigen Digitalprojekten infrage kommen – oft bis zu 50 % der zuwendungsfähigen Ausgaben.",
+      "Für KMUs in Bayern kann der Digitalbonus Bayern bei förderfähigen Digitalprojekten infrage kommen – oft bis zu 50 % der zuwendungsfähigen Ausgaben.",
   },
   {
     name: "Leasing",
@@ -60,7 +60,7 @@ export function Pricing() {
             <div className="rounded-2xl border border-border/60 bg-background/80 p-4">
               <p className="text-sm font-medium text-muted-foreground">Förderung</p>
               <p className="mt-2 text-2xl font-semibold text-foreground">bis zu 50 %</p>
-              <p className="mt-1 text-sm text-muted-foreground">oft direkt relevant für KMU</p>
+              <p className="mt-1 text-sm text-muted-foreground">relevant für KMUs in Bayern</p>
             </div>
           </div>
         </div>
