@@ -5,7 +5,7 @@ import { Reveal } from "./Reveal";
 const PLANS = [
   {
     name: "Kauf",
-    price: "ab 6.900 €",
+    price: "ab 3.900 €",
     note: "einmalig",
     desc: "Die Website gehört vollständig Ihnen. Einmalige Investition, volle Kontrolle.",
     features: [
@@ -13,11 +13,11 @@ const PLANS = [
       "Quellcode-Übergabe",
       "Einmalzahlung",
       "Optionale Wartung separat",
-      "Fördercheck für Digitalbonus Bayern",
+      "Digitalbonus Bayern geprüft",
     ],
     highlight: false,
     noteLine:
-      "Für KMU in Bayern kann der Digitalbonus Bayern bei förderfähigen Digitalprojekten infrage kommen, oft bis zu 50 % der zuwendungsfähigen Ausgaben.",
+      "Für KMU in Bayern kann der Digitalbonus Bayern bei förderfähigen Digitalprojekten infrage kommen – oft bis zu 50 % der zuwendungsfähigen Ausgaben.",
   },
   {
     name: "Leasing",
@@ -39,7 +39,32 @@ export function Pricing() {
           intro="Zwei Wege zur eigenen Website, passend zu Budget und Bedarf."
           align="center"
         />
-        <Reveal stagger className="mt-14 grid grid-cols-1 gap-6 md:grid-cols-2">
+        <div className="mt-10 rounded-3xl border border-accent/30 bg-gradient-to-br from-accent/10 via-background to-secondary/70 p-6 shadow-soft md:p-8">
+          <div className="flex flex-wrap items-center gap-2">
+            <span className="rounded-full bg-accent px-3 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-accent-foreground">
+              Digitalbonus Bayern
+            </span>
+            <span className="text-sm text-muted-foreground">Förderung für förderfähige Webprojekte möglich</span>
+          </div>
+          <div className="mt-6 grid gap-4 md:grid-cols-3">
+            <div className="rounded-2xl border border-border/60 bg-background/80 p-4">
+              <p className="text-sm font-medium text-muted-foreground">Durchschnitt</p>
+              <p className="mt-2 text-2xl font-semibold text-foreground">8.000–15.000 €</p>
+              <p className="mt-1 text-sm text-muted-foreground">ca. 6–10 Wochen</p>
+            </div>
+            <div className="rounded-2xl border border-accent/30 bg-accent/10 p-4">
+              <p className="text-sm font-medium text-muted-foreground">Bei uns</p>
+              <p className="mt-2 text-2xl font-semibold text-foreground">ab 3.900 €</p>
+              <p className="mt-1 text-sm text-muted-foreground">nur 3 Wochen</p>
+            </div>
+            <div className="rounded-2xl border border-border/60 bg-background/80 p-4">
+              <p className="text-sm font-medium text-muted-foreground">Förderung</p>
+              <p className="mt-2 text-2xl font-semibold text-foreground">bis zu 50 %</p>
+              <p className="mt-1 text-sm text-muted-foreground">oft direkt relevant für KMU</p>
+            </div>
+          </div>
+        </div>
+        <Reveal stagger className="mt-8 grid grid-cols-1 gap-6 md:grid-cols-2">
           {PLANS.map((p) => (
             <div
               key={p.name}
