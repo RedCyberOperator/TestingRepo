@@ -36,8 +36,12 @@ export function Process() {
         <SectionHeading
           eyebrow="Prozess"
           title="Klar geführt, von Anfang an."
-          intro="Ein übersichtlicher Ablauf mit festen Entscheidungen, damit Design und Entwicklung ruhig vorankommen."
+          intro="Ein übersichtlicher Ablauf über insgesamt 3 Wochen, mit einer Iteration pro Woche, um Wünsche und Anliegen gezielt auszubauen."
         />
+
+        <p className="mt-6 max-w-3xl text-sm leading-relaxed text-muted-foreground sm:text-base">
+          Wir gehen in drei Wochen gemeinsam durch den Prozess – jede Woche eine Iteration, in der wir Wünsche und Anliegen weiterentwickeln, präzisieren und gemeinsam verdichten.
+        </p>
 
         <Reveal className="mt-10 rounded-2xl border border-border bg-background p-3 shadow-soft sm:mt-14 sm:p-5 md:p-8">
           <div className="grid gap-2 lg:grid-cols-4 lg:gap-0">
