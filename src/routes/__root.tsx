@@ -11,7 +11,7 @@ import { useEffect, type ReactNode } from "react";
 
 import appCss from "../styles.css?url";
 import logoLight from "@/assets/Logo.png";
-import shareBanner from "@/assets/ShareBanner.png";
+import shareImage from "@/assets/F_V.png";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 
 function NotFoundComponent() {
@@ -87,18 +87,21 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       },
       { name: "author", content: "F&V Webseiten" },
       { name: "theme-color", content: "#fbfbfc" },
-      { property: "og:title", content: "F&V Webseiten — Webdesign-Agentur" },
+      { property: "og:title", content: "F&V Webseiten — Webdesign-Agentur für KMUs" },
       {
         property: "og:description",
         content:
-          "Minimalistische, performante Websites mit Charakter. Strategie, Design und Entwicklung aus einer Hand.",
+          "Webdesign für KMUs: klare Websites, starke Marken und schnelle Performance.",
       },
       { property: "og:type", content: "website" },
       { property: "og:locale", content: "de_DE" },
-      { property: "og:image", content: shareBanner },
-      { property: "og:image:alt", content: "F&V Webseiten - Webdesign-Agentur" },
+      { property: "og:image", content: shareImage },
+      { property: "og:image:type", content: "image/png" },
+      { property: "og:image:alt", content: "F&V Webseiten - Webdesign für KMUs" },
       { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:image", content: shareBanner },
+      { name: "twitter:title", content: "F&V Webseiten — Webdesign-Agentur für KMUs" },
+      { name: "twitter:description", content: "Webdesign für KMUs: klare Websites, starke Marken und schnelle Performance." },
+      { name: "twitter:image", content: shareImage },
     ],
     links: [
       { rel: "stylesheet", href: appCss },

@@ -9,7 +9,7 @@ import { Pricing } from "@/components/site/Pricing";
 import { Testimonials } from "@/components/site/Testimonials";
 import { Team } from "@/components/site/Team";
 import { ScrollText } from "@/components/site/ScrollText";
-
+import shareImage from "@/assets/F_V.png";
 
 import { Contact } from "@/components/site/Contact";
 import { Footer } from "@/components/site/Footer";
@@ -30,20 +30,24 @@ const orgJsonLd = {
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "F&V Webseiten — Webdesign-Agentur für ruhige, hochwertige Websites" },
+      { title: "F&V Webseiten — Webdesign-Agentur für KMUs" },
       {
         name: "description",
         content:
-          "F&V Webseiten gestaltet minimalistische, schnelle Websites mit Charakter. Strategie, Design und Entwicklung aus einer Hand — als Kauf oder Leasing.",
+          "Webdesign für KMUs: klare Websites, starke Marken und schnelle Performance.",
       },
-      { property: "og:title", content: "F&V Webseiten — Webdesign-Agentur" },
+      { property: "og:title", content: "F&V Webseiten — Webdesign-Agentur für KMUs" },
       {
         property: "og:description",
-        content: "Minimalistische, performante Markenauftritte. Kauf oder Leasing.",
+        content: "Webdesign für KMUs: klare Websites, starke Marken und schnelle Performance.",
       },
-      { property: "og:image", content: "https://fv-webseiten.com/ShareBanner.png" },
-      { property: "og:image:alt", content: "F&V Webseiten - Webdesign-Agentur" },
-      { name: "twitter:image", content: "https://fv-webseiten.com/ShareBanner.png" },
+      { property: "og:image", content: shareImage },
+      { property: "og:image:type", content: "image/png" },
+      { property: "og:image:alt", content: "F&V Webseiten - Webdesign für KMUs" },
+      { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:title", content: "F&V Webseiten — Webdesign-Agentur für KMUs" },
+      { name: "twitter:description", content: "Webdesign für KMUs: klare Websites, starke Marken und schnelle Performance." },
+      { name: "twitter:image", content: shareImage },
     ],
     scripts: [{ type: "application/ld+json", children: JSON.stringify(orgJsonLd) }],
   }),
