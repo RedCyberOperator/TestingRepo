@@ -13,6 +13,7 @@ export function Contact() {
     if (!consent) return;
 
     setError(null);
+    setSent(false);
     setLoading(true);
 
     const form = e.currentTarget;
@@ -81,6 +82,11 @@ export function Contact() {
               <span>Ich willige ein, dass meine Angaben zur Bearbeitung der Anfrage verarbeitet werden. Hinweise in der Datenschutzerklärung.</span>
             </label>
             {error ? <p className="text-sm text-destructive">{error}</p> : null}
+            {sent ? (
+              <p className="text-sm text-accent-foreground/90">
+                Vielen Dank! Ihre Nachricht wurde erfolgreich gesendet. Wir melden uns in Kürze bei Ihnen.
+              </p>
+            ) : null}
             <button type="submit" disabled={loading} className="inline-flex w-full items-center justify-center rounded-full bg-accent px-6 py-3.5 text-sm font-semibold text-accent-foreground transition-transform duration-300 hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-primary disabled:cursor-not-allowed disabled:opacity-60">
               {loading ? "Senden…" : "Anfrage senden"}
             </button>

@@ -11,6 +11,7 @@ import { useEffect, type ReactNode } from "react";
 
 import appCss from "../styles.css?url";
 import logoLight from "@/assets/Logo.png";
+import shareBanner from "@/assets/ShareBanner.png";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 
 function NotFoundComponent() {
@@ -94,7 +95,10 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       },
       { property: "og:type", content: "website" },
       { property: "og:locale", content: "de_DE" },
+      { property: "og:image", content: shareBanner },
+      { property: "og:image:alt", content: "F&V Webseiten - Webdesign-Agentur" },
       { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:image", content: shareBanner },
     ],
     links: [
       { rel: "stylesheet", href: appCss },
